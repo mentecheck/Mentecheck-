@@ -1,5 +1,6 @@
 from flask import Flask, request, session, redirect, render_template_string
 import sqlite3, hashlib, datetime
+from email_service import enviar_resultado
 
 app = Flask(__name__)
 app.secret_key = 'mentecheck2026'
@@ -156,6 +157,12 @@ def qsm():
         conn.execute('INSERT INTO qsm (usuario_id,data,pontuacao,zona) VALUES (?,?,?,?)',
                     (session['id'], datetime.datetime.now().isoformat(), total, zona))
         conn.commit()
+        
+        # Buscar email do usuário para enviar o resultado
+        u = conn.execute('SELECT email, nome FROM usuarios WHERE id=?', (session['id'],)).fetchone()
+        if u:
+            enviar_resultado(u['email'], u['nome'], zona, total, msg)
+            
         conn.close()
         resultado = f'''<div class="card">
 <h2>Resultado</h2>

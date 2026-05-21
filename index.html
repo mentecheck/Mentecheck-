@@ -642,8 +642,41 @@ footer strong { color: rgba(255,255,255,0.8); }
   <h1>Avaliação de Saúde Mental <em>Baseada em Padrões Clínicos</em></h1>
   <p>Entenda melhor sua saúde mental com questionários validados cientificamente e receba seu resultado detalhado por e-mail.</p>
   <div class="hero-btns">
-    <a href="#planos" class="btn-primary">Iniciar Avaliação</a>
-    <a href="#como" class="btn-outline">Como Funciona</a>
+    <a href="javascript:void(0)" onclick="abrirQuiz()" class="btn-primary">Fazer Teste Rápido (1 min)</a>
+    <a href="#planos" class="btn-outline">Ver Planos Completos</a>
+  </div>
+
+  <!-- QUIZ RÁPIDO (FACEBOOK ADS STYLE) -->
+  <div id="quiz-container" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+    <div id="quiz-card" style="background:white; padding:40px; border-radius:20px; max-width:500px; width:100%; text-align:center; position:relative;">
+      <button onclick="fecharQuiz()" style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
+      <div id="quiz-step-1">
+        <h3 style="margin-bottom:20px;">1. Você sente que seu sono nunca é suficiente, mesmo dormindo 8 horas?</h3>
+        <button class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="proximoPasso(2)">Sim, frequentemente</button>
+        <button class="btn-outline" style="width:100%;" onclick="proximoPasso(2)">Não, durmo bem</button>
+      </div>
+      <div id="quiz-step-2" style="display:none;">
+        <h3 style="margin-bottom:20px;">2. Com que frequência você sente um aperto no peito ou agitação sem motivo aparente?</h3>
+        <button class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="proximoPasso(3)">Sempre</button>
+        <button class="btn-outline" style="width:100%;" onclick="proximoPasso(3)">Raramente</button>
+      </div>
+      <div id="quiz-step-3" style="display:none;">
+        <h3 style="margin-bottom:20px;">3. Você sente que sua mente "não desliga" nem nos finais de semana?</h3>
+        <button class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="proximoPasso(4)">Sim, o tempo todo</button>
+        <button class="btn-outline" style="width:100%;" onclick="proximoPasso(4)">Consigo relaxar</button>
+      </div>
+      <div id="quiz-step-4" style="display:none;">
+        <h3 style="margin-bottom:20px;">4. A irritação com o trânsito ou rotina está afetando suas relações?</h3>
+        <button class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="proximoPasso(5)">Sim, ando estressado(a)</button>
+        <button class="btn-outline" style="width:100%;" onclick="proximoPasso(5)">Não me afeta</button>
+      </div>
+      <div id="quiz-step-5" style="display:none;">
+        <h3 style="margin-bottom:20px;">5. Você gostaria de saber se esses sintomas são apenas cansaço ou algo que precisa de atenção?</h3>
+        <p style="margin-bottom:20px; color:#666;">Para ver sua indicação preliminar e acessar o questionário completo, informe seu e-mail:</p>
+        <input type="email" id="user-email" placeholder="Seu melhor e-mail" style="width:100%; padding:15px; border-radius:10px; border:1px solid #ddd; margin-bottom:20px;">
+        <button class="btn-primary" style="width:100%;" onclick="finalizarQuiz()">Ver Resultado e Iniciar Avaliação</button>
+      </div>
+    </div>
   </div>
   <div class="hero-stats">
     <div class="stat">
@@ -884,8 +917,33 @@ document.querySelectorAll('.faq-question').forEach(q => {
   });
 });
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
+  // Quiz Logic
+  function abrirQuiz() {
+    document.getElementById('quiz-container').style.display = 'flex';
+  }
+  function fecharQuiz() {
+    document.getElementById('quiz-container').style.display = 'none';
+  }
+  function proximoPasso(passo) {
+    for(let i=1; i<=5; i++) {
+      document.getElementById('quiz-step-'+i).style.display = 'none';
+    }
+    document.getElementById('quiz-step-'+passo).style.display = 'block';
+  }
+  function finalizarQuiz() {
+    const email = document.getElementById('user-email').value;
+    if(!email || !email.includes('@')) {
+      alert('Por favor, insira um e-mail válido.');
+      return;
+    }
+    localStorage.setItem('mentecheck_email', email);
+    fecharQuiz();
+    window.location.href = '#planos';
+    alert('E-mail cadastrado! Agora escolha seu plano para receber o relatório completo.');
+  }
+
+	// Smooth scroll
+	document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(a.getAttribute('href'));
