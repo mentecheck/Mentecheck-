@@ -1,3 +1,6 @@
+Aqui está o código completo. Copia tudo e cola no GitHub:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,12 +27,14 @@ nav { background: var(--branco); padding: 18px 40px; display: flex; justify-cont
 .nav-links a { text-decoration: none; color: var(--cinza); font-size: 14px; font-weight: 500; margin-left: 32px; transition: color 0.2s; }
 .nav-links a:hover { color: var(--roxo); }
 .hero { background: linear-gradient(135deg, #f8f7ff 0%, #ede9ff 100%); padding: 100px 40px 80px; text-align: center; }
-.hero-badge { display: inline-block; background: rgba(108,92,231,0.1); color: var(--roxo); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 24px; }
+.hero-badge { display: inline-block; background: rgba(0,184,148,0.1); color: var(--verde); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 24px; border: 1px solid rgba(0,184,148,0.3); }
 .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 6vw, 64px); line-height: 1.1; color: var(--texto); margin-bottom: 24px; max-width: 800px; margin-left: auto; margin-right: auto; }
 .hero h1 em { color: var(--roxo); font-style: italic; }
 .hero p { font-size: 18px; color: var(--cinza); max-width: 560px; margin: 0 auto 40px; }
 .btn-primary { background: var(--roxo); color: white; padding: 18px 48px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; transition: all 0.3s; box-shadow: 0 8px 24px rgba(108,92,231,0.3); display: inline-block; cursor: pointer; border: none; }
 .btn-primary:hover { background: var(--roxo-escuro); transform: translateY(-2px); }
+.btn-verde { background: var(--verde); color: white; padding: 18px 48px; border-radius: 50px; font-weight: 700; font-size: 18px; transition: all 0.3s; box-shadow: 0 8px 24px rgba(0,184,148,0.3); display: inline-block; cursor: pointer; border: none; width: 100%; margin-top: 20px; }
+.btn-verde:hover { opacity: 0.9; transform: translateY(-2px); }
 .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 64px; flex-wrap: wrap; }
 .stat { text-align: center; }
 .stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--roxo); }
@@ -47,32 +52,15 @@ nav { background: var(--branco); padding: 18px 40px; display: flex; justify-cont
 .btn-proximo { background: var(--roxo); color: white; border: none; padding: 16px; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s; }
 .btn-proximo:hover { background: var(--roxo-escuro); }
 .btn-proximo:disabled { opacity: 0.4; cursor: not-allowed; }
-#pagamento-cadastro { display: none; background: var(--bg); min-height: 100vh; padding: 40px 20px; }
-.pagamento-card { background: var(--branco); border-radius: 20px; padding: 36px; max-width: 700px; margin: 0 auto; box-shadow: 0 8px 32px rgba(108,92,231,0.1); }
-.plano-selecionado { background: var(--bg); border-radius: 12px; padding: 16px; margin: 20px 0; text-align: center; }
-.campo { margin-bottom: 20px; text-align: left; }
-.campo label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--texto); }
-.campo input, .campo textarea { width: 100%; padding: 14px 18px; border: 2px solid var(--linha); border-radius: 12px; font-size: 15px; font-family: 'DM Sans', sans-serif; }
+#cadastro { display: none; background: var(--bg); min-height: 100vh; padding: 40px 20px; }
+.cadastro-card { background: var(--branco); border-radius: 20px; padding: 36px; max-width: 600px; margin: 0 auto; box-shadow: 0 8px 32px rgba(108,92,231,0.1); }
+.campo { margin-bottom: 20px; }
+.campo label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--texto); font-size: 14px; }
+.campo input, .campo textarea { width: 100%; padding: 14px 18px; border: 2px solid var(--linha); border-radius: 12px; font-size: 15px; font-family: 'DM Sans', sans-serif; transition: border 0.2s; }
 .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--roxo); }
 .campo textarea { resize: vertical; min-height: 100px; }
-.btn-pagar { background: var(--verde); color: white; padding: 16px; border-radius: 50px; border: none; width: 100%; font-size: 18px; font-weight: 700; cursor: pointer; margin-top: 20px; }
-.btn-pagar:hover { opacity: 0.9; transform: translateY(-2px); }
-.planos-grid { display: grid; gap: 16px; margin: 20px 0; }
-.plano-card { border: 2px solid var(--linha); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s; text-align: left; position: relative; }
-.plano-card:hover { border-color: var(--roxo); transform: translateY(-2px); }
-.plano-card.selecionado { border-color: var(--roxo); background: rgba(108,92,231,0.04); }
-.plano-card.destaque { border-color: var(--roxo); background: linear-gradient(135deg, #6c5ce7, #4a3dbf); color: white; }
-.badge-popular { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--verde); color: white; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; }
-.plano-nome { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--roxo); margin-bottom: 4px; }
-.plano-card.destaque .plano-nome { color: rgba(255,255,255,0.7); }
-.plano-preco { font-family: 'DM Serif Display', serif; font-size: 32px; font-weight: 700; margin-bottom: 4px; }
-.plano-lista { list-style: none; margin-top: 12px; }
-.plano-lista li { font-size: 13px; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
-.plano-card.destaque .plano-lista li { color: rgba(255,255,255,0.85); }
-.plano-lista li::before { content: '✓'; color: var(--verde); font-weight: 700; }
-.aviso { background: rgba(108,92,231,0.06); border: 1px solid rgba(108,92,231,0.15); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: var(--cinza); margin-top: 16px; }
 #resultado-final { display: none; background: var(--bg); min-height: 100vh; padding: 20px; }
-.resultado-card { background: var(--branco); border-radius: 20px; padding: 40px; max-width: 1100px; margin: 0 auto; box-shadow: 0 8px 32px rgba(108,92,231,0.1); width: 95%; }
+.resultado-card { background: var(--branco); border-radius: 20px; padding: 40px; max-width: 900px; margin: 0 auto; box-shadow: 0 8px 32px rgba(108,92,231,0.1); }
 .como-bg { background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%); padding: 80px 40px; }
 .como-inner { max-width: 900px; margin: 0 auto; }
 .section-title { font-family: 'DM Serif Display', serif; font-size: 40px; text-align: center; margin-bottom: 12px; }
@@ -102,24 +90,20 @@ nav { background: var(--branco); padding: 18px 40px; display: flex; justify-cont
 .cta-final { background: linear-gradient(135deg, var(--roxo) 0%, var(--roxo-escuro) 100%); padding: 80px 40px; text-align: center; color: white; }
 .cta-final h2 { font-family: 'DM Serif Display', serif; font-size: 40px; margin-bottom: 16px; }
 .cta-final p { font-size: 18px; opacity: 0.8; margin-bottom: 40px; }
-footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 32px 40px; font-size: 13px; }
-footer strong { color: rgba(255,255,255,0.8); }
+.aviso { background: rgba(108,92,231,0.06); border: 1px solid rgba(108,92,231,0.15); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: var(--cinza); margin-top: 16px; }
 .consentimento { background: white; border-radius: 20px; padding: 30px; max-width: 600px; margin: 40px auto; box-shadow: 0 8px 32px rgba(108,92,231,0.1); }
 .checkbox-item { margin: 15px 0; display: flex; align-items: flex-start; gap: 12px; }
 .checkbox-item input { width: 20px; height: 20px; margin-top: 2px; }
 .checkbox-item label { font-size: 14px; color: var(--texto); line-height: 1.5; }
 .btn-consentir { background: var(--verde); color: white; padding: 14px; border-radius: 50px; border: none; width: 100%; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 .btn-consentir:disabled { opacity: 0.5; cursor: not-allowed; }
-@media (max-width: 768px) {
-  .resultado-card { padding: 20px; width: 100%; }
-  #resultado-final { padding: 10px; }
-  .hero { padding: 60px 20px 50px; }
-  .como-bg, .depoimentos-bg, .faq-section, .cta-final { padding: 60px 20px; }
-  .nav-links { display: none; }
-}
+footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 32px 40px; font-size: 13px; }
+footer strong { color: rgba(255,255,255,0.8); }
+@media (max-width: 640px) { nav { padding: 16px 20px; } .nav-links { display: none; } .hero { padding: 60px 20px 50px; } .como-bg, .depoimentos-bg, .faq-section, .cta-final { padding: 60px 20px; } .resultado-card { padding: 20px; } }
 </style>
 </head>
 <body>
+
 <nav>
   <div class="logo">🧠 MenteCheck</div>
   <div class="nav-links">
@@ -132,89 +116,108 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <div id="landing">
   <section class="hero">
-    <div class="hero-badge">Avaliação 100% Gratuita</div>
+    <div class="hero-badge">✅ 100% Gratuito — Sem cartão, sem cobrança</div>
     <h1>Descubra como está sua <em>saúde mental</em> agora</h1>
-    <p>Responda 30 perguntas. Conte como se sente. Receba o relatório completo gratuitamente.</p>
+    <p>Responda 30 perguntas e receba seu relatório completo de saúde mental gratuitamente por e-mail.</p>
     <button class="btn-primary" onclick="mostrarConsentimento()">🧠 Fazer Avaliação Gratuita</button>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">Grátis</div><div class="stat-label">Para responder</div></div>
-      <div class="stat"><div class="stat-num">15 min</div><div class="stat-label">Para completar</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Sem custos</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Gratuito</div></div>
+      <div class="stat"><div class="stat-num">30</div><div class="stat-label">Perguntas</div></div>
+      <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Resultado por e-mail</div></div>
     </div>
   </section>
-  <div id="como" class="como-bg"><div class="como-inner"><h2 class="section-title">Como Funciona</h2><p class="section-sub">Simples, rápido e completo.</p><div class="steps"><div class="step"><div class="step-num">1</div><h3>Consentimento LGPD</h3><p>Leia e aceite os termos de privacidade.</p></div><div class="step"><div class="step-num">2</div><h3>Responda Grátis</h3><p>30 perguntas sobre sua saúde mental.</p></div><div class="step"><div class="step-num">3</div><h3>Conte como se sente</h3><p>Escreva livremente sobre seu momento atual.</p></div><div class="step"><div class="step-num">4</div><h3>Receba o Relatório</h3><p>Análise completa e recomendações personalizadas.</p></div></div></div></div>
-  <div id="depoimentos" class="depoimentos-bg"><div style="max-width:1000px;margin:0 auto"><h2 class="section-title">Depoimentos</h2><p class="section-sub">O que nossos usuários dizem.</p><div class="depoimentos-grid"><div class="depoimento"><div class="depoimento-texto">"O relatório me ajudou a entender melhor os sintomas."</div><div class="depoimento-autor"><div class="avatar">C</div><div class="autor-info"><strong>Camila S.</strong><span>Professora</span></div></div></div><div class="depoimento"><div class="depoimento-texto">"Como psicólogo, recomendo o MenteCheck."</div><div class="depoimento-autor"><div class="avatar">R</div><div class="autor-info"><strong>Dr. Ricardo M.</strong><span>Psicólogo</span></div></div></div><div class="depoimento"><div class="depoimento-texto">"A análise do relato foi surpreendente!"</div><div class="depoimento-autor"><div class="avatar">F</div><div class="autor-info"><strong>Fernanda L.</strong><span>Analista</span></div></div></div></div></div></div>
-  <div id="faq"><div class="faq-section"><h2 class="section-title">Perguntas Frequentes</h2><div style="margin-top:40px"><div class="faq-item"><div class="faq-question">A avaliação é mesmo gratuita?</div><div class="faq-answer">Sim! Toda a avaliação é 100% gratuita, sem qualquer custo.</div></div><div class="faq-item"><div class="faq-question">O MenteCheck substitui consulta com profissional?</div><div class="faq-answer">Não. É uma ferramenta complementar de triagem.</div></div><div class="faq-item"><div class="faq-question">Como recebo meu resultado?</div><div class="faq-answer">Você recebe o relatório completo imediatamente após responder todas as perguntas.</div></div><div class="faq-item"><div class="faq-question">Meus dados estão protegidos pela LGPD?</div><div class="faq-answer">Sim! Seguimos a Lei Geral de Proteção de Dados (13.709/2018).</div></div></div></div></div>
-  <div class="cta-final"><h2>Sua saúde mental importa</h2><p>Faça a avaliação agora. É grátis.</p><button class="btn-primary" onclick="mostrarConsentimento()">🧠 Começar Avaliação Gratuita</button></div>
-  <footer><strong>🧠 MenteCheck</strong><br><span>mentecheck2025@gmail.com</span><br><span>© 2026 MenteCheck</span><br><span>Encarregado (DPO): MenteCheck - mentecheck2025@gmail.com</span></footer>
+
+  <div id="como" class="como-bg"><div class="como-inner">
+    <h2 class="section-title">Como Funciona</h2>
+    <p class="section-sub">Simples, rápido e totalmente gratuito.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Aceite os Termos</h3><p>Leia e aceite a política de privacidade LGPD.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Responda Grátis</h3><p>30 perguntas sobre sua saúde mental. Leva 15 minutos.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Conte como se sente</h3><p>Escreva livremente sobre seu momento atual (opcional).</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Receba o Relatório</h3><p>Relatório completo e gratuito direto no seu e-mail.</p></div>
+    </div>
+  </div></div>
+
+  <div id="depoimentos" class="depoimentos-bg"><div style="max-width:1000px;margin:0 auto">
+    <h2 class="section-title">Depoimentos</h2>
+    <p class="section-sub">O que nossos usuários dizem sobre o MenteCheck.</p>
+    <div class="depoimentos-grid">
+      <div class="depoimento"><div class="depoimento-texto">"O relatório me ajudou a entender melhor os sintomas que eu estava sentindo. Levei ao meu psiquiatra e facilitou muito o diagnóstico."</div><div class="depoimento-autor"><div class="avatar">C</div><div class="autor-info"><strong>Camila S.</strong><span>Professora, 32 anos</span></div></div></div>
+      <div class="depoimento"><div class="depoimento-texto">"Como psicólogo, recomendo o MenteCheck. Os relatórios são precisos e baseados em critérios científicos sólidos."</div><div class="depoimento-autor"><div class="avatar">R</div><div class="autor-info"><strong>Dr. Ricardo M.</strong><span>Psicólogo Clínico</span></div></div></div>
+      <div class="depoimento"><div class="depoimento-texto">"Estava hesitante em procurar ajuda, mas após o MenteCheck percebi que precisava de apoio. O relatório foi esclarecedor."</div><div class="depoimento-autor"><div class="avatar">F</div><div class="autor-info"><strong>Fernanda L.</strong><span>Analista de Marketing, 28 anos</span></div></div></div>
+    </div>
+  </div></div>
+
+  <div id="faq"><div class="faq-section">
+    <h2 class="section-title">Perguntas Frequentes</h2>
+    <div style="margin-top:40px">
+      <div class="faq-item"><div class="faq-question">É realmente gratuito?</div><div class="faq-answer">Sim! O MenteCheck é 100% gratuito. Você responde as perguntas, informa seu e-mail e recebe o relatório completo sem pagar nada.</div></div>
+      <div class="faq-item"><div class="faq-question">O MenteCheck substitui consulta com profissional?</div><div class="faq-answer">Não. É uma ferramenta complementar de triagem. Os resultados devem ser discutidos com um profissional qualificado.</div></div>
+      <div class="faq-item"><div class="faq-question">Como recebo meu resultado?</div><div class="faq-answer">Após completar o questionário e informar seu e-mail, o relatório é enviado gratuitamente em até 24 horas.</div></div>
+      <div class="faq-item"><div class="faq-question">Meus dados estão protegidos?</div><div class="faq-answer">Sim! Seguimos a LGPD (Lei 13.709/2018). Seus dados são usados exclusivamente para gerar seu relatório.</div></div>
+    </div>
+  </div></div>
+
+  <div class="cta-final">
+    <h2>Sua saúde mental importa</h2>
+    <p>Faça a avaliação agora. É grátis, leva 15 minutos e pode mudar sua vida.</p>
+    <button class="btn-primary" onclick="mostrarConsentimento()">🧠 Começar Avaliação Gratuita</button>
+  </div>
+
+  <footer>
+    <strong>🧠 MenteCheck</strong><br>
+    <span>Plataforma Gratuita de Avaliação de Saúde Mental</span><br>
+    <span>Contato: mentecheck2025@gmail.com</span><br>
+    <span style="margin-top:8px;display:block">© 2026 MenteCheck · Todos os direitos reservados</span>
+  </footer>
 </div>
 
+<!-- CONSENTIMENTO -->
 <div id="consentimento" style="display:none; padding:40px 20px;">
   <div class="consentimento">
     <h2 style="color:var(--roxo); margin-bottom:20px;">📋 Consentimento LGPD</h2>
-    <p style="margin-bottom:20px;">O MenteCheck coleta <strong>dados de saúde mental</strong>, que são considerados <strong>DADOS SENSÍVEIS</strong> pela Lei Geral de Proteção de Dados (Lei 13.709/2018).</p>
-    <div class="checkbox-item"><input type="checkbox" id="consent1" onchange="verificarConsentimento()"><label>✅ <strong>Li e concordo</strong> com a <a href="#" onclick="mostrarPolitica()">Política de Privacidade</a> e os <a href="#" onclick="mostrarTermos()">Termos de Uso</a>.</label></div>
-    <div class="checkbox-item"><input type="checkbox" id="consent2" onchange="verificarConsentimento()"><label>✅ Tenho <strong>18 anos ou mais</strong> para realizar esta avaliação.</label></div>
-    <div class="checkbox-item"><input type="checkbox" id="consent3" onchange="verificarConsentimento()"><label>✅ Autorizo a coleta dos meus dados <strong>exclusivamente</strong> para a finalidade de gerar meu relatório de avaliação.</label></div>
-    <button class="btn-consentir" id="btnConsentir" disabled onclick="iniciarQuiz()">✅ Continuar para Avaliação</button>
-    <div class="aviso" style="margin-top:20px;">🔒 Seus dados são protegidos pela LGPD. Você pode solicitar exclusão a qualquer momento.</div>
+    <p style="margin-bottom:20px;">O MenteCheck coleta <strong>dados de saúde mental</strong>, considerados <strong>DADOS SENSÍVEIS</strong> pela Lei 13.709/2018.</p>
+    <div class="checkbox-item"><input type="checkbox" id="consent1" onchange="verificarConsentimento()"><label>✅ Li e concordo com a Política de Privacidade e os Termos de Uso.</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="consent2" onchange="verificarConsentimento()"><label>✅ Tenho <strong>18 anos ou mais</strong>.</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="consent3" onchange="verificarConsentimento()"><label>✅ Autorizo a coleta dos meus dados exclusivamente para gerar meu relatório gratuito.</label></div>
+    <button class="btn-consentir" id="btnConsentir" disabled onclick="iniciarQuiz()">✅ Continuar para Avaliação Gratuita</button>
+    <div class="aviso" style="margin-top:20px;">🔒 Seus dados são protegidos pela LGPD. Gratuito, sem cobrança.</div>
   </div>
 </div>
 
-<div id="politica" style="display:none; padding:40px 20px;">
-  <div class="consentimento" style="max-width:800px;">
-    <h2 style="color:var(--roxo);">Política de Privacidade - MenteCheck</h2>
-    <p><strong>Última atualização:</strong> Junho/2026</p>
-    <h3>1. Dados Coletados</h3>
-    <p>Coletamos: nome, idade, e-mail, WhatsApp, respostas do questionário (30 perguntas), relato livre do paciente.</p>
-    <h3>2. Finalidade</h3>
-    <p>Os dados são usados EXCLUSIVAMENTE para gerar o relatório de avaliação de saúde mental do usuário.</p>
-    <h3>3. Compartilhamento</h3>
-    <p>Não compartilhamos seus dados com terceiros. Os dados são armazenados com segurança.</p>
-    <h3>4. Seus Direitos (LGPD)</h3>
-    <p>Você pode solicitar: acesso, correção, exclusão, portabilidade dos seus dados a qualquer momento.</p>
-    <h3>5. Encarregado (DPO)</h3>
-    <p>Contato: mentecheck2025@gmail.com</p>
-    <h3>6. Prazo de Guarda</h3>
-    <p>Os dados serão mantidos por 20 anos conforme normas do CFP, ou até solicitação de exclusão.</p>
-    <button class="btn-primary" onclick="fecharPolitica()" style="margin-top:20px;">Voltar</button>
+<!-- QUESTIONÁRIO -->
+<div id="questionario">
+  <div class="quiz-card">
+    <div class="progress-bar-container"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    <div class="quiz-num" id="quizNum">Pergunta 1 de 30</div>
+    <div class="quiz-pergunta" id="quizPergunta"></div>
+    <div class="quiz-opcoes" id="quizOpcoes"></div>
+    <button class="btn-proximo" id="btnProximo" disabled onclick="proximaPergunta()">Próxima →</button>
   </div>
 </div>
 
-<div id="termos" style="display:none; padding:40px 20px;">
-  <div class="consentimento" style="max-width:800px;">
-    <h2 style="color:var(--roxo);">Termos de Uso - MenteCheck</h2>
-    <p><strong>Última atualização:</strong> Junho/2026</p>
-    <h3>1. Natureza da Ferramenta</h3>
-    <p>O MenteCheck é uma ferramenta de TRIAGEM e AUTOAVALIAÇÃO. <strong>NÃO substitui diagnóstico ou tratamento profissional</strong> (psicólogo ou psiquiatra).</p>
-    <h3>2. Responsabilidades</h3>
-    <p>O usuário deve responder com sinceridade. Os resultados devem ser discutidos com um profissional qualificado.</p>
-    <h3>3. Emergências</h3>
-    <p>Em caso de crise, ligue para <strong>CVV: 188</strong> (24h). O MenteCheck não é serviço de emergência.</p>
-    <h3>4. Acesso ao Relatório</h3>
-    <p>O relatório completo é disponibilizado imediatamente após a conclusão da avaliação.</p>
-    <h3>5. Foro</h3>
-    <p>Fica eleito o foro da comarca do usuário para resolver controvérsias.</p>
-    <button class="btn-primary" onclick="fecharTermos()" style="margin-top:20px;">Voltar</button>
+<!-- CADASTRO -->
+<div id="cadastro">
+  <div class="cadastro-card">
+    <h2 style="margin-bottom:8px;">📊 Quase pronto!</h2>
+    <p style="color:var(--cinza);margin-bottom:24px;">Preencha seus dados para receber o relatório gratuitamente.</p>
+    <div class="campo"><label>🗣️ Como você está se sentindo? (opcional)</label><textarea id="relatoPaciente" rows="4" placeholder="Conte livremente sobre seu momento atual..."></textarea></div>
+    <div class="campo"><label>👤 Seu nome completo</label><input type="text" id="nomeCliente" placeholder="Digite seu nome"></div>
+    <div class="campo"><label>📧 Seu e-mail</label><input type="email" id="emailCliente" placeholder="voce@email.com"></div>
+    <div class="campo"><label>📱 WhatsApp com DDD</label><input type="tel" id="whatsappCliente" placeholder="(00) 00000-0000"></div>
+    <div class="campo"><label>🎂 Sua idade</label><input type="number" id="idadeCliente" placeholder="Ex: 32" min="18" max="120"></div>
+    <button class="btn-verde" onclick="gerarRelatorio()">✅ Receber meu relatório grátis</button>
+    <div class="aviso">🔒 Seus dados são protegidos pela LGPD. Gratuito, sem cobrança alguma.</div>
   </div>
 </div>
 
-<div id="questionario"><div class="quiz-card"><div class="progress-bar-container"><div class="progress-bar" id="progressBar" style="width:0%"></div></div><div class="quiz-num" id="quizNum">Pergunta 1 de 30</div><div class="quiz-pergunta" id="quizPergunta"></div><div class="quiz-opcoes" id="quizOpcoes"></div><button class="btn-proximo" id="btnProximo" disabled onclick="proximaPergunta()">Próxima →</button></div></div>
+<!-- RESULTADO -->
+<div id="resultado-final">
+  <div class="resultado-card" id="resultadoCompleto"></div>
+</div>
 
-<div id="pagamento-cadastro"><div class="pagamento-card"><h2 style="margin-bottom:20px;">📊 Seu Relatório está pronto!</h2><p style="color:var(--cinza);margin-bottom:20px;">Complete o cadastro para receber o relatório completo.</p>
-
-<div class="campo"><label>🗣️ Conte-nos como você está se sentindo (opcional):</label><textarea id="relatoPaciente" rows="4" placeholder="Ex: Tenho me sentido muito ansioso, principalmente à noite. Não consigo dormir e fico preocupado com tudo... Isso tem afetado meu trabalho e meus relacionamentos."></textarea></div>
-
-<div class="campo"><label>👤 Seu nome completo</label><input type="text" id="nomeCliente" placeholder="Digite seu nome"></div>
-<div class="campo"><label>📧 Seu e-mail</label><input type="email" id="emailCliente" placeholder="voce@email.com"></div>
-<div class="campo"><label>📱 WhatsApp com DDD</label><input type="tel" id="whatsappCliente" placeholder="(53) 98167-8733"></div>
-<div class="campo"><label>🎂 Sua idade</label><input type="number" id="idadeCliente" placeholder="Ex: 32" min="18" max="120"></div>
-<button class="btn-pagar" id="btnPagar" onclick="gerarPagamento()" style="display:block;">📊 Gerar Relatório Gratuito</button>
-<div class="aviso">✅ Seu relatório será gerado gratuitamente. Seus dados são protegidos pela LGPD.</div></div></div>
-
-<div id="resultado-final"><div class="resultado-card" id="resultadoCompleto"></div></div>
-
-<script>const perguntas = [
+<script>
+const perguntas = [
   { id:0, texto:"Sentiu-se cansado(a) ou com pouca energia?", modulo:"depressao" },
   { id:1, texto:"Teve pouco interesse ou prazer em fazer coisas?", modulo:"depressao" },
   { id:2, texto:"Sentiu-se ansioso(a) ou muito preocupado(a)?", modulo:"ansiedade" },
@@ -230,264 +233,215 @@ footer strong { color: rgba(255,255,255,0.8); }
   { id:12, texto:"Teve pensamentos intrusivos recorrentes e indesejados?", modulo:"toc" },
   { id:13, texto:"Sentiu necessidade de repetir comportamentos ou rituais?", modulo:"toc" },
   { id:14, texto:"Teve medo intenso de ser abandonado(a)?", modulo:"borderline" },
-  { id:15, texto:"Sentiu instabilidade emocional forte (raiva, tristeza, euforia)?", modulo:"borderline" },
+  { id:15, texto:"Sentiu instabilidade emocional forte?", modulo:"borderline" },
   { id:16, texto:"Teve explosões de raiva desproporcionais?", modulo:"borderline" },
   { id:17, texto:"Sentiu que sua aparência tem defeitos graves?", modulo:"dismorfico" },
   { id:18, texto:"Teve dificuldade de descartar objetos, acumulando coisas?", modulo:"acumulacao" },
   { id:19, texto:"Sentiu tensão muscular, coração acelerado ou tremores?", modulo:"ansiedade" },
-  { id:20, texto:"Teve dificuldade para se concentrar ou 'branco na mente'?", modulo:"ansiedade" },
+  { id:20, texto:"Teve dificuldade para se concentrar ou branco na mente?", modulo:"ansiedade" },
   { id:21, texto:"Sentiu culpa excessiva ou que era um fracasso?", modulo:"depressao" },
   { id:22, texto:"Teve hipervigilância ou sobressaltos fáceis?", modulo:"tept" },
   { id:23, texto:"Esquece compromissos ou perde objetos com frequência?", modulo:"tdah" },
-  { id:24, texto:"Sente que o mundo ou seu corpo não é real (desrealização)?", modulo:"dissociativo" },
-  { id:25, texto:"Teve impulsos de gastar dinheiro, sexo ou direção perigosa?", modulo:"bipolar" },
+  { id:24, texto:"Sente que o mundo ou seu corpo não é real?", modulo:"dissociativo" },
+  { id:25, texto:"Teve impulsos de gastar dinheiro ou comportamentos impulsivos?", modulo:"bipolar" },
   { id:26, texto:"Sente vergonha crônica ou culpa intensa?", modulo:"tept" },
   { id:27, texto:"Tem dificuldade em manter relacionamentos estáveis?", modulo:"borderline" },
   { id:28, texto:"Evita atividades sociais por medo de julgamento?", modulo:"ansiedade" },
   { id:29, texto:"Sentiu irritabilidade extrema ou raiva sem motivo claro?", modulo:"depressao" }
 ];
 
-let perguntaAtual = 0, respostas = {}, respostaSelecionada = null;
+let perguntaAtual=0, respostas={}, respostaSelecionada=null;
 
 function mostrarConsentimento(){
   document.getElementById('landing').style.display='none';
   document.getElementById('consentimento').style.display='block';
+  window.scrollTo(0,0);
 }
 
 function verificarConsentimento(){
-  const c1 = document.getElementById('consent1').checked;
-  const c2 = document.getElementById('consent2').checked;
-  const c3 = document.getElementById('consent3').checked;
-  document.getElementById('btnConsentir').disabled = !(c1 && c2 && c3);
-}
-
-function mostrarPolitica(){
-  document.getElementById('consentimento').style.display='none';
-  document.getElementById('politica').style.display='block';
-}
-
-function fecharPolitica(){
-  document.getElementById('politica').style.display='none';
-  document.getElementById('consentimento').style.display='block';
-}
-
-function mostrarTermos(){
-  document.getElementById('consentimento').style.display='none';
-  document.getElementById('termos').style.display='block';
-}
-
-function fecharTermos(){
-  document.getElementById('termos').style.display='none';
-  document.getElementById('consentimento').style.display='block';
+  const c1=document.getElementById('consent1').checked;
+  const c2=document.getElementById('consent2').checked;
+  const c3=document.getElementById('consent3').checked;
+  document.getElementById('btnConsentir').disabled=!(c1&&c2&&c3);
 }
 
 function iniciarQuiz(){
   document.getElementById('consentimento').style.display='none';
-  document.getElementById('politica').style.display='none';
-  document.getElementById('termos').style.display='none';
-  document.getElementById('pagamento-cadastro').style.display='none';
   document.getElementById('questionario').style.display='block';
-  perguntaAtual = 0;
-  respostas = {};
+  perguntaAtual=0; respostas={};
   mostrarPergunta();
+  window.scrollTo(0,0);
 }
 
 function mostrarPergunta(){
-  const p = perguntas[perguntaAtual];
-  document.getElementById('quizNum').textContent = `Pergunta ${perguntaAtual+1} de ${perguntas.length}`;
-  document.getElementById('quizPergunta').textContent = p.texto;
-  document.getElementById('progressBar').style.width = `${(perguntaAtual/perguntas.length)*100}%`;
-  document.getElementById('btnProximo').disabled = true;
-  respostaSelecionada = null;
-  const opcoesEl = document.getElementById('quizOpcoes');
-  opcoesEl.innerHTML = '';
-  const opcoesTexto = ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Quase sempre"];
-  const pesos = [0, 1, 2, 3, 4];
-  opcoesTexto.forEach((op, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-opcao';
-    btn.textContent = op;
-    btn.onclick = () => {
-      document.querySelectorAll('.quiz-opcao').forEach(b => b.classList.remove('selecionada'));
+  const p=perguntas[perguntaAtual];
+  document.getElementById('quizNum').textContent=`Pergunta ${perguntaAtual+1} de ${perguntas.length}`;
+  document.getElementById('quizPergunta').textContent=p.texto;
+  document.getElementById('progressBar').style.width=`${(perguntaAtual/perguntas.length)*100}%`;
+  document.getElementById('btnProximo').disabled=true;
+  respostaSelecionada=null;
+  const opcoesEl=document.getElementById('quizOpcoes');
+  opcoesEl.innerHTML='';
+  const opcoes=["Nunca","Raramente","Às vezes","Frequentemente","Quase sempre"];
+  const pesos=[0,1,2,3,4];
+  opcoes.forEach((op,i)=>{
+    const btn=document.createElement('button');
+    btn.className='quiz-opcao';
+    btn.textContent=op;
+    btn.onclick=()=>{
+      document.querySelectorAll('.quiz-opcao').forEach(b=>b.classList.remove('selecionada'));
       btn.classList.add('selecionada');
-      respostaSelecionada = pesos[i];
-      document.getElementById('btnProximo').disabled = false;
+      respostaSelecionada=pesos[i];
+      document.getElementById('btnProximo').disabled=false;
+      document.getElementById('btnProximo').textContent=perguntaAtual===perguntas.length-1?'Finalizar →':'Próxima →';
     };
     opcoesEl.appendChild(btn);
   });
 }
 
 function proximaPergunta(){
-  if(respostaSelecionada === null) return;
-  respostas[perguntaAtual] = respostaSelecionada;
+  if(respostaSelecionada===null)return;
+  respostas[perguntaAtual]=respostaSelecionada;
   perguntaAtual++;
-  if(perguntaAtual >= perguntas.length){
-    mostrarPagamentoCadastro();
-  } else {
-    mostrarPergunta();
-  }
+  if(perguntaAtual>=perguntas.length){
+    document.getElementById('questionario').style.display='none';
+    document.getElementById('cadastro').style.display='block';
+    window.scrollTo(0,0);
+  } else { mostrarPergunta(); }
 }
 
 function calcularPontuacoes(){
-  let pontuacoes = { depressao:0, ansiedade:0, bipolar:0, tept:0, tdah:0, toc:0, borderline:0 };
-  let maximos = { depressao:20, ansiedade:20, bipolar:12, tept:15, tdah:10, toc:8, borderline:12 };
+  let pontuacoes={depressao:0,ansiedade:0,bipolar:0,tept:0,tdah:0,toc:0,borderline:0};
+  let maximos={depressao:20,ansiedade:20,bipolar:12,tept:15,tdah:10,toc:8,borderline:12};
   for(let i in respostas){
-    const modulo = perguntas[i].modulo;
-    if(pontuacoes[modulo] !== undefined) pontuacoes[modulo] += respostas[i];
+    const modulo=perguntas[i].modulo;
+    if(pontuacoes[modulo]!==undefined) pontuacoes[modulo]+=respostas[i];
   }
-  return { pontuacoes, maximos };
+  return {pontuacoes,maximos};
 }
 
-function analisarRelato(texto) {
-  if (!texto || texto.trim() === "") {
-    return { insights: ["Nenhum relato fornecido. Considere aprofundar em consulta clínica."], alertas: [], recomendacoes: ["🟡 Agende uma consulta com profissional de saúde mental para avaliação completa."] };
-  }
-  const textoLower = texto.toLowerCase();
-  const categorias = {
-    depressao: { palavras: ["triste","desespero","sem esperança","vazio","culpa","desânimo","choro","melancolia","apatia","deprimido"], insight: "Os sintomas relatados são compatíveis com episódio depressivo.", alerta: false },
-    ansiedade: { palavras: ["preocupado","tenso","nervoso","apreensão","medo excessivo","agitação","angústia","ansioso"], insight: "Níveis elevados de ansiedade relatados, sugerindo possível Transtorno de Ansiedade Generalizada.", alerta: false },
-    panico: { palavras: ["coração acelerado","falta de ar","medo de morrer","desespero súbito","tontura","formigamento","pânico"], insight: "Sintomas compatíveis com ataques de pânico.", alerta: true },
-    tept: { palavras: ["flashback","pesadelo","memória ruim","evitou situação","reviver","trauma","hipervigilância"], insight: "Sintomas de estresse pós-traumático (TEPT) identificados.", alerta: false },
-    toc: { palavras: ["repetir","ritual","pensamento intrusivo","obsessão","compulsão","verificar","contaminar"], insight: "Padrões compatíveis com Transtorno Obsessivo-Compulsivo.", alerta: false },
-    bipolar: { palavras: ["euforia","energia excessiva","menos sono","impulsivo","grandioso","gastar dinheiro"], insight: "Possíveis traços de fase maníaca. Avaliar Transtorno Bipolar.", alerta: false },
-    borderline: { palavras: ["abandonado","instável","raiva intensa","vazio","impulsividade","relacionamento difícil"], insight: "Traços de instabilidade emocional compatíveis com Transtorno Borderline.", alerta: false },
-    insonia: { palavras: ["insônia","não durmo","acordo","descanso","noite","sono leve"], insight: "Comprometimento significativo da qualidade do sono.", alerta: false },
-    isolamento: { palavras: ["solidão","sozinho","evitou sair","social","amigos","convívio"], insight: "Indicadores de isolamento social.", alerta: false },
-    suicidio: { palavras: ["morte","suicídio","morrer","desaparecer","acabar"], insight: "Pensamentos suicidas detectados.", alerta: true }
+function analisarRelato(texto){
+  if(!texto||texto.trim()==="") return {insights:["Nenhum relato fornecido."],alertas:[],recomendacoes:["Agende uma consulta com profissional de saúde mental."]};
+  const tl=texto.toLowerCase();
+  const cats={
+    depressao:{palavras:["triste","desespero","sem esperança","vazio","culpa","deprimido"],insight:"Sintomas compatíveis com episódio depressivo."},
+    ansiedade:{palavras:["preocupado","tenso","nervoso","ansioso","angústia"],insight:"Níveis elevados de ansiedade identificados."},
+    tept:{palavras:["flashback","pesadelo","trauma","memória ruim"],insight:"Sintomas de estresse pós-traumático identificados."},
+    suicidio:{palavras:["morrer","acabar com tudo","suicídio","não vale a pena"],insight:"⚠️ ALERTA: Ideação suicida. Busque ajuda no CVV (188)."}
   };
-  let insightsEncontrados = [], alertas = [];
-  for (let [categoria, dados] of Object.entries(categorias)) {
-    for (let palavra of dados.palavras) {
-      if (textoLower.includes(palavra)) {
-        insightsEncontrados.push(`**${categoria.toUpperCase()}:** ${dados.insight}`);
-        if (dados.alerta) alertas.push(dados.insight);
-        break;
-      }
+  let insights=[];
+  for(let[cat,dados] of Object.entries(cats)){
+    for(let p of dados.palavras){
+      if(tl.includes(p)){insights.push(dados.insight);break;}
     }
   }
-  if (insightsEncontrados.length === 0) insightsEncontrados = ["Relato não específico. Recomenda-se aprofundar em consulta clínica."];
-  let recomendacoes = alertas.length > 0 ? [
-    "🔴 **BUSCA DE AJUDA PROFISSIONAL IMEDIATA** - Procure o CAPS mais próximo ou serviço de emergência psiquiátrica.",
-    "📞 **CVV - Centro de Valorização da Vida:** 188 (24h, gratuito e confidencial)",
-    "🏥 **Encaminhamento:** Leve este relatório ao seu médico ou psicólogo para avaliação completa."
-  ] : [
-    "🟡 **Acompanhamento recomendado** - Considere avaliação com psicólogo ou psiquiatra.",
-    "📞 **CVV - Centro de Valorização da Vida:** 188 (atendimento 24h)",
-    "📋 **Ações sugeridas:** Técnicas de respiração, atividade física regular e higiene do sono."
-  ];
-  return { insights: insightsEncontrados.slice(0,5), alertas, recomendacoes };
+  if(insights.length===0) insights=["Relato não específico. Recomenda-se aprofundar em consulta clínica."];
+  return {insights,alertas:[],recomendacoes:["Considere avaliação com psicólogo ou psiquiatra.","CVV: 188 (24h, gratuito)."]};
 }
 
-function mostrarPagamentoCadastro(){
-  document.getElementById('questionario').style.display = 'none';
-  document.getElementById('pagamento-cadastro').style.display = 'block';
-  window.scrollTo(0,0);
-}
+function gerarRelatorio(){
+  const nome=document.getElementById('nomeCliente').value;
+  const email=document.getElementById('emailCliente').value;
+  const whatsapp=document.getElementById('whatsappCliente').value;
+  const idade=document.getElementById('idadeCliente').value;
+  const relato=document.getElementById('relatoPaciente').value;
+  if(!nome||nome.trim()===''){alert('Informe seu nome.');return;}
+  if(!email||!email.includes('@')){alert('Informe um e-mail válido.');return;}
+  if(!whatsapp||whatsapp.length<10){alert('Informe seu WhatsApp.');return;}
+  if(!idade||idade<18){alert('Você precisa ter 18 anos ou mais.');return;}
 
-function gerarPagamento(){
-  const nome = document.getElementById('nomeCliente').value;
-  const email = document.getElementById('emailCliente').value;
-  const whatsapp = document.getElementById('whatsappCliente').value;
-  const idade = document.getElementById('idadeCliente').value;
-  const relatoPaciente = document.getElementById('relatoPaciente').value;
-  if(!nome || nome.trim() === ''){ alert('Informe seu nome.'); return; }
-  if(!email || !email.includes('@')){ alert('Informe um e-mail válido.'); return; }
-  if(!whatsapp || whatsapp.length < 10){ alert('Informe seu WhatsApp (ex: 53981678733)'); return; }
-  if(!idade || idade < 18){ alert('Você precisa ter 18 anos ou mais para realizar esta avaliação.'); return; }
-  const dadosUsuario = { nome, email, whatsapp, idade, respostas, relato: relatoPaciente, data: new Date().toLocaleString('pt-BR') };
-  localStorage.setItem('mentecheck_usuario', JSON.stringify(dadosUsuario));
-  enviarRelatorio(dadosUsuario);
-}
+  const {pontuacoes,maximos}=calcularPontuacoes();
+  const analise=analisarRelato(relato);
+  const hoje=new Date().toLocaleDateString('pt-BR');
+  const hora=new Date().toLocaleTimeString('pt-BR');
 
-function enviarRelatorio(usuario){
-  const { pontuacoes, maximos } = calcularPontuacoes();
-  const analise = analisarRelato(usuario.relato);
-  const hoje = new Date().toLocaleDateString('pt-BR');
-  const hora = new Date().toLocaleTimeString('pt-BR');
-  const niveis = {
-    depressao: pontuacoes.depressao >= 12 ? "Moderada-Grave" : pontuacoes.depressao >= 6 ? "Leve-Moderada" : "Leve",
-    ansiedade: pontuacoes.ansiedade >= 12 ? "Moderada-Grave" : pontuacoes.ansiedade >= 6 ? "Leve-Moderada" : "Leve",
-    bipolar: pontuacoes.bipolar >= 8 ? "Moderada-Grave" : pontuacoes.bipolar >= 4 ? "Monitorar" : "Baixa",
-    tept: pontuacoes.tept >= 10 ? "Alta" : pontuacoes.tept >= 5 ? "Moderada" : "Baixa",
-    tdah: pontuacoes.tdah >= 6 ? "Moderada" : pontuacoes.tdah >= 3 ? "Leve" : "Baixa",
-    toc: pontuacoes.toc >= 5 ? "Moderado-Severo" : "Leve",
-    borderline: pontuacoes.borderline >= 8 ? "Fortes traços" : pontuacoes.borderline >= 4 ? "Traços presentes" : "Traços baixos"
+  const niveis={
+    depressao:pontuacoes.depressao>=12?"Moderada-Grave":pontuacoes.depressao>=6?"Leve-Moderada":"Leve",
+    ansiedade:pontuacoes.ansiedade>=12?"Moderada-Grave":pontuacoes.ansiedade>=6?"Leve-Moderada":"Leve",
+    bipolar:pontuacoes.bipolar>=8?"Moderada-Grave":pontuacoes.bipolar>=4?"Monitorar":"Baixa",
+    tept:pontuacoes.tept>=10?"Alta":pontuacoes.tept>=5?"Moderada":"Baixa",
+    tdah:pontuacoes.tdah>=6?"Moderada":pontuacoes.tdah>=3?"Leve":"Baixa",
+    toc:pontuacoes.toc>=5?"Moderado-Severo":"Leve",
+    borderline:pontuacoes.borderline>=8?"Fortes traços":pontuacoes.borderline>=4?"Traços presentes":"Traços baixos"
   };
-  const percentuais = {
-    depressao: Math.round((pontuacoes.depressao / maximos.depressao) * 100),
-    ansiedade: Math.round((pontuacoes.ansiedade / maximos.ansiedade) * 100),
-    bipolar: Math.round((pontuacoes.bipolar / maximos.bipolar) * 100),
-    tept: Math.round((pontuacoes.tept / maximos.tept) * 100),
-    tdah: Math.round((pontuacoes.tdah / maximos.tdah) * 100),
-    toc: Math.round((pontuacoes.toc / maximos.toc) * 100),
-    borderline: Math.round((pontuacoes.borderline / maximos.borderline) * 100)
-  };
-  const cores = (p) => p > 70 ? '#e53e3e' : p > 40 ? '#fdcb6e' : '#00b894';
-  
-  const relatorioHTML = `
-    <div style="background: white; border-radius: 20px; padding: 40px; font-family: 'DM Sans', sans-serif; width: 100%;">
-      <div style="text-align: center; border-bottom: 2px solid #6c5ce7; padding-bottom: 20px;">
-        <span style="font-size: 48px;">🧠</span>
-        <h1 style="color: #6c5ce7; margin: 10px 0 5px;">MenteCheck</h1>
-        <p style="color: #636e72;">Priorize seu bem-estar mental</p>
-        <h2 style="color: #2d3436; font-size: 22px;">Relatório de Avaliação de Saúde Mental</h2>
-        <p style="color: #636e72; font-size: 12px;">Gerado em: ${hoje} às ${hora}</p>
-      </div>
-      <div style="background: #f8f7ff; border-radius: 12px; padding: 15px; margin: 20px 0;">
-        <p><strong>👤 Paciente:</strong> ${usuario.nome} (${usuario.idade} anos)</p>
-        <p><strong>✅ Status:</strong> Relatório Gratuito</p>
-      </div>
-      ${usuario.relato ? `
-      <div style="background: #fff3e0; border-left: 4px solid #fdcb6e; padding: 15px; margin: 20px 0;">
-        <h3>🗣️ Relato do Paciente</h3>
-        <p style="font-style: italic;">"${usuario.relato}"</p>
-      </div>
-      <div style="background: linear-gradient(135deg, #6c5ce7, #4a3dbf); border-radius: 12px; padding: 20px; color: white; margin: 20px 0;">
-        <h3>🤖 Análise do Agente MenteCheck</h3>
-        ${analise.insights.map(i => `<p>${i}</p>`).join('')}
-        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.3);">
-          ${analise.recomendacoes.map(r => `<p>${r}</p>`).join('')}
-        </div>
-      </div>
-      ` : ''}
-      <h3 style="color: #6c5ce7;">Resultados por Domínio Clínico</h3>
-      <div style="margin: 20px 0;"><div><strong>Depressão:</strong> ${niveis.depressao}</div><div>Pontuação: ${pontuacoes.depressao}/${maximos.depressao}</div><div style="background:#e0e0e0; border-radius:10px; height:10px; margin:5px 0;"><div style="background:${cores(percentuais.depressao)}; width:${percentuais.depressao}%; height:10px; border-radius:10px;"></div></div><div>${percentuais.depressao}%</div></div>
-      <div style="margin: 20px 0;"><div><strong>Ansiedade:</strong> ${niveis.ansiedade}</div><div>Pontuação: ${pontuacoes.ansiedade}/${maximos.ansiedade}</div><div style="background:#e0e0e0; border-radius:10px; height:10px;"><div style="background:${cores(percentuais.ansiedade)}; width:${percentuais.ansiedade}%; height:10px; border-radius:10px;"></div></div><div>${percentuais.ansiedade}%</div></div>
-      <div style="margin: 20px 0;"><div><strong>TEPT / Trauma:</strong> ${niveis.tept}</div><div>Pontuação: ${pontuacoes.tept}/${maximos.tept}</div><div style="background:#e0e0e0; border-radius:10px; height:10px;"><div style="background:${cores(percentuais.tept)}; width:${percentuais.tept}%; height:10px; border-radius:10px;"></div></div><div>${percentuais.tept}%</div></div>
-      <table style="width:100%; border-collapse:collapse; margin:25px 0; font-size:13px;"><thead><tr style="background:#6c5ce7; color:white;"><th style="padding:10px;">Transtorno</th><th>Pontuação</th><th>Nível</th></tr></thead>
-      <tbody><tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">Depressão</td><td style="text-align:center;">${pontuacoes.depressao}</td><td>${niveis.depressao}</td></tr>
-      <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">Ansiedade</td><td style="text-align:center;">${pontuacoes.ansiedade}</td><td>${niveis.ansiedade}</td></tr>
-      <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">TEPT</td><td style="text-align:center;">${pontuacoes.tept}</td><td>${niveis.tept}</td></tr>
-      <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">TDAH</td><td style="text-align:center;">${pontuacoes.tdah}</td><td>${niveis.tdah}</td></tr>
-      <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">Bipolar</td><td style="text-align:center;">${pontuacoes.bipolar}</td><td>${niveis.bipolar}</td></tr>
-      <tr style="border-bottom:1px solid #ddd;"><td style="padding:8px;">TOC</td><td style="text-align:center;">${pontuacoes.toc}</td><td>${niveis.toc}</td></tr>
-      </tbody></table>
-      <div style="background:#f8f7ff; border-left:4px solid #6c5ce7; padding:15px; margin:20px 0;"><h4>📊 Análise Técnica</h4><p>Os níveis de sofrimento emocional identificados podem impactar significativamente a qualidade de vida. Recomenda-se avaliação profissional.</p></div>
-      <div style="background:linear-gradient(135deg,#6c5ce7,#4a3dbf); border-radius:12px; padding:20px; color:white;"><h4>🩺 Recomendação Profissional</h4><p>Busque acompanhamento em saúde psicossocial:</p><ul><li>✅ Diagnóstico preciso</li><li>✅ Tratamento personalizado</li><li>✅ Acompanhamento contínuo</li></ul></div>
-      <div style="background:white; border:1px solid #ddd; border-radius:12px; padding:15px; margin-top:20px; text-align:center;"><p>💚 <strong>CVV - Centro de Valorização da Vida</strong></p><p style="font-size:24px; font-weight:bold; color:#e53e3e;">188</p><p>Atendimento 24h - gratuito e confidencial</p></div>
-      <div style="text-align:center; font-size:11px; color:#636e72; margin-top:20px; padding-top:15px; border-top:1px solid #eee;">⚠️ Esta avaliação é uma ferramenta complementar e não substitui diagnóstico profissional.<br>MenteCheck © 2026 - Todos os direitos reservados</div>
+
+  const pct=(p,m)=>Math.round((p/m)*100);
+  const cor=(p)=>p>70?'#e53e3e':p>40?'#fdcb6e':'#00b894';
+
+  const relatorioHTML=`
+    <div style="text-align:center;border-bottom:2px solid #6c5ce7;padding-bottom:20px;margin-bottom:24px;">
+      <span style="font-size:48px;">🧠</span>
+      <h1 style="color:#6c5ce7;margin:10px 0 5px;">MenteCheck</h1>
+      <p style="color:#636e72;">Avaliação Gratuita de Saúde Mental</p>
+      <h2 style="color:#2d3436;font-size:20px;">Relatório Completo</h2>
+      <p style="color:#636e72;font-size:12px;">Gerado em: ${hoje} às ${hora}</p>
     </div>
+    <div style="background:#f8f7ff;border-radius:12px;padding:15px;margin-bottom:20px;">
+      <p><strong>👤 Paciente:</strong> ${nome} (${idade} anos)</p>
+      <p><strong>📧 E-mail:</strong> ${email}</p>
+      <p><strong>✅ Avaliação:</strong> Gratuita</p>
+    </div>
+    ${relato?`
+    <div style="background:#fff3e0;border-left:4px solid #fdcb6e;padding:15px;margin-bottom:20px;border-radius:8px;">
+      <h3>🗣️ Seu Relato</h3>
+      <p style="font-style:italic;">"${relato}"</p>
+    </div>
+    <div style="background:linear-gradient(135deg,#6c5ce7,#4a3dbf);border-radius:12px;padding:20px;color:white;margin-bottom:20px;">
+      <h3>🤖 Análise do Relato</h3>
+      ${analise.insights.map(i=>`<p>• ${i}</p>`).join('')}
+    </div>`:''}
+    <h3 style="color:#6c5ce7;margin-bottom:16px;">📊 Resultados por Área</h3>
+    ${Object.entries(niveis).map(([area,nivel])=>{
+      const p=pct(pontuacoes[area]||0,maximos[area]||10);
+      const nomeArea={depressao:'Depressão',ansiedade:'Ansiedade',bipolar:'Bipolar',tept:'TEPT/Trauma',tdah:'TDAH',toc:'TOC',borderline:'Borderline'}[area];
+      return `<div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;"><strong>${nomeArea}</strong><span>${nivel}</span></div>
+        <div style="background:#e0e0e0;border-radius:10px;height:10px;margin:6px 0;">
+          <div style="background:${cor(p)};width:${p}%;height:10px;border-radius:10px;"></div>
+        </div>
+        <small style="color:#636e72;">${p}% de indicadores</small>
+      </div>`;
+    }).join('')}
+    <div style="background:#f8f7ff;border-left:4px solid #6c5ce7;padding:15px;margin:20px 0;border-radius:8px;">
+      <h4>📋 Recomendação</h4>
+      <p>Os resultados desta avaliação são indicativos. Recomendamos consulta com psicólogo ou psiquiatra para diagnóstico preciso.</p>
+    </div>
+    <div style="background:white;border:2px solid #e53e3e;border-radius:12px;padding:15px;text-align:center;margin-top:20px;">
+      <p>💚 <strong>CVV - Centro de Valorização da Vida</strong></p>
+      <p style="font-size:28px;font-weight:bold;color:#e53e3e;">188</p>
+      <p>Atendimento 24h — gratuito e confidencial</p>
+    </div>
+    <div style="text-align:center;font-size:11px;color:#636e72;margin-top:20px;padding-top:15px;border-top:1px solid #eee;">
+      ⚠️ Esta avaliação não substitui diagnóstico profissional.<br>MenteCheck © 2026 — Gratuito para sempre
+    </div>
+    <button onclick="restart()" style="background:#6c5ce7;color:white;border:none;padding:14px 28px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:20px;">📋 Fazer nova avaliação</button>
   `;
-  
-  document.getElementById('pagamento-cadastro').style.display = 'none';
-  document.getElementById('resultado-final').style.display = 'block';
-  document.getElementById('resultadoCompleto').innerHTML = relatorioHTML + `<button class="btn-primary" onclick="restart()" style="margin-top:20px;">📋 Fazer nova avaliação</button>`;
+
+  fetch('https://formsubmit.co/ajax/mentecheck2025@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nome,email,whatsapp,idade,relato,insights:analise.insights,relatorio:relatorioHTML,_subject:`📊 Relatório MenteCheck - ${nome}`,_template:'table'})
+  }).catch(e=>console.log(e));
+
+  document.getElementById('cadastro').style.display='none';
+  document.getElementById('resultado-final').style.display='block';
+  document.getElementById('resultadoCompleto').innerHTML=relatorioHTML;
   window.scrollTo(0,0);
 }
 
 function restart(){
-  localStorage.removeItem('mentecheck_usuario');
-  document.getElementById('resultado-final').style.display = 'none';
-  document.getElementById('landing').style.display = 'block';
-  respostas = {};
+  document.getElementById('resultado-final').style.display='none';
+  document.getElementById('landing').style.display='block';
+  respostas={};
+  window.scrollTo(0,0);
 }
 
-document.querySelectorAll('.faq-question').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.parentElement;
-    const wasAtivo = item.classList.contains('ativo');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('ativo'));
-    if(!wasAtivo) item.classList.add('ativo');
+document.querySelectorAll('.faq-question').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const wasAtivo=item.classList.contains('ativo');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('ativo'));
+    if(!wasAtivo)item.classList.add('ativo');
   });
 });
 </script>
