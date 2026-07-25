@@ -1,6 +1,3 @@
-Aqui está o código completo. Copia tudo e cola no GitHub:
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,6 +15,8 @@ Aqui está o código completo. Copia tudo e cola no GitHub:
   --texto: #2d3436;
   --cinza: #636e72;
   --verde: #00b894;
+  --vermelho: #e53e3e;
+  --amarelo: #fdcb6e;
   --linha: rgba(108,92,231,0.12);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -99,6 +98,106 @@ nav { background: var(--branco); padding: 18px 40px; display: flex; justify-cont
 .btn-consentir:disabled { opacity: 0.5; cursor: not-allowed; }
 footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 32px 40px; font-size: 13px; }
 footer strong { color: rgba(255,255,255,0.8); }
+
+/* Estilos para botões de ação no resultado */
+.btn-enviar-email {
+  background: var(--roxo);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-enviar-email:hover {
+  background: var(--roxo-escuro);
+  transform: translateY(-2px);
+}
+.btn-whatsapp {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-whatsapp:hover {
+  background: #1DA851;
+  transform: translateY(-2px);
+}
+.btn-compartilhar {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-compartilhar:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+.btn-restart {
+  background: var(--roxo);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.3s;
+}
+.btn-restart:hover {
+  background: var(--roxo-escuro);
+}
+.btn-group {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.alerta-urgencia {
+  background: #ffe0e0;
+  border: 2px solid var(--vermelho);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  margin: 16px 0;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(229,62,62,0.3); }
+  50% { box-shadow: 0 0 0 10px rgba(229,62,62,0); }
+  100% { box-shadow: 0 0 0 0 rgba(229,62,62,0); }
+}
 @media (max-width: 640px) { nav { padding: 16px 20px; } .nav-links { display: none; } .hero { padding: 60px 20px 50px; } .como-bg, .depoimentos-bg, .faq-section, .cta-final { padding: 60px 20px; } .resultado-card { padding: 20px; } }
 </style>
 </head>
@@ -179,7 +278,7 @@ footer strong { color: rgba(255,255,255,0.8); }
     <p style="margin-bottom:20px;">O MenteCheck coleta <strong>dados de saúde mental</strong>, considerados <strong>DADOS SENSÍVEIS</strong> pela Lei 13.709/2018.</p>
     <div class="checkbox-item"><input type="checkbox" id="consent1" onchange="verificarConsentimento()"><label>✅ Li e concordo com a Política de Privacidade e os Termos de Uso.</label></div>
     <div class="checkbox-item"><input type="checkbox" id="consent2" onchange="verificarConsentimento()"><label>✅ Tenho <strong>18 anos ou mais</strong>.</label></div>
-    <div class="checkbox-item"><input type="checkbox" id="consent3" onchange="verificarConsentimento()"><label>✅ Autorizo a coleta dos meus dados exclusivamente para gerar meu relatório gratuito.</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="consent3" onchange="verificarConsentimento()"><label>✅ Autorizo o processamento dos meus dados para gerar o relatório de saúde mental.</label></div>
     <button class="btn-consentir" id="btnConsentir" disabled onclick="iniciarQuiz()">✅ Continuar para Avaliação Gratuita</button>
     <div class="aviso" style="margin-top:20px;">🔒 Seus dados são protegidos pela LGPD. Gratuito, sem cobrança.</div>
   </div>
@@ -311,8 +410,17 @@ function proximaPergunta(){
 }
 
 function calcularPontuacoes(){
-  let pontuacoes={depressao:0,ansiedade:0,bipolar:0,tept:0,tdah:0,toc:0,borderline:0};
-  let maximos={depressao:20,ansiedade:20,bipolar:12,tept:15,tdah:10,toc:8,borderline:12};
+  // TODOS os módulos agora são calculados
+  let pontuacoes={
+    depressao:0, ansiedade:0, bipolar:0, tept:0,
+    tdah:0, toc:0, borderline:0, dismorfico:0,
+    acumulacao:0, dissociativo:0
+  };
+  let maximos={
+    depressao:20, ansiedade:20, bipolar:12, tept:16,
+    tdah:12, toc:8, borderline:16, dismorfico:4,
+    acumulacao:4, dissociativo:4
+  };
   for(let i in respostas){
     const modulo=perguntas[i].modulo;
     if(pontuacoes[modulo]!==undefined) pontuacoes[modulo]+=respostas[i];
@@ -322,21 +430,130 @@ function calcularPontuacoes(){
 
 function analisarRelato(texto){
   if(!texto||texto.trim()==="") return {insights:["Nenhum relato fornecido."],alertas:[],recomendacoes:["Agende uma consulta com profissional de saúde mental."]};
-  const tl=texto.toLowerCase();
+  const tl=texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); // Remove acentos para busca
+  const tlOriginal=texto.toLowerCase();
+  
   const cats={
-    depressao:{palavras:["triste","desespero","sem esperança","vazio","culpa","deprimido"],insight:"Sintomas compatíveis com episódio depressivo."},
-    ansiedade:{palavras:["preocupado","tenso","nervoso","ansioso","angústia"],insight:"Níveis elevados de ansiedade identificados."},
-    tept:{palavras:["flashback","pesadelo","trauma","memória ruim"],insight:"Sintomas de estresse pós-traumático identificados."},
-    suicidio:{palavras:["morrer","acabar com tudo","suicídio","não vale a pena"],insight:"⚠️ ALERTA: Ideação suicida. Busque ajuda no CVV (188)."}
+    depressao:{
+      palavras:["triste","depress","desespero","sem esperanca","vazio","culpa","fracass","chorar","choro","desanimo","desanimado","sem vontade","sem forca","sem motivacao","nao consigo sair da cama","tudo parece inutil","nao tenho prazer","nao gosto de nada"],
+      insight:"Sintomas compatíveis com episódio depressivo. Recomenda-se avaliação com profissional.",
+      nivel:"moderado"
+    },
+    ansiedade:{
+      palavras:["preocupado","tenso","nervoso","ansioso","angustia","coracao acelerado","palpitacao","nao consigo parar de pensar","medo constante","sensacao de perigo","nao consigo relaxar","insomnia","insônia","nao consigo dormir","acordo cansado"],
+      insight:"Níveis elevados de ansiedade identificados. Considere técnicas de relaxamento e avaliação profissional.",
+      nivel:"moderado"
+    },
+    bipolar:{
+      palavras:["muito energico","fases","mudanca de humor","hipomania","mania","gastei muito dinheiro","comportamento impulsivo","nao preciso dormir","falo muito rapido","ideas aceleradas","grandiosidade","euforia","altos e baixos emocionais"],
+      insight:"Indicadores de possível transtorno bipolar (fases de euforia e depressão). Avaliação psiquiátrica essencial.",
+      nivel:"alto"
+    },
+    tept:{
+      palavras:["flashback","pesadelo","trauma","memoria ruim","memoria intrusiva","hipervigilante","sobressalto","abuso","violencia","acidente","vergonha cronica","evito lembrar"],
+      insight:"Sintomas de estresse pós-traumático (TEPT) identificados. Terapia focada em trauma é recomendada.",
+      nivel:"alto"
+    },
+    tdah:{
+      palavras:["nao consigo focar","nao consigo prestar atencao","esqueco tudo","distraido","procrastinacao","perco coisas","nao termino tarefas","mente acelerada","inquieto","hiperatividade"],
+      insight:"Indicadores compatíveis com TDAH (Déficit de Atenção e Hiperatividade). Avaliação neuropsicológica recomendada.",
+      nivel:"moderado"
+    },
+    toc:{
+      palavras:["pensamentos repetitivos","rituais","compulsao","comportamento compulsivo","verificar","lavar as maos","contar","sintoma que nao sai","pensamento intrusivo","nao consigo parar de pensar nisso"],
+      insight:"Sintomas compatíveis com Transtorno Obsessivo-Compulsivo (TOC). Tratamento específico disponível.",
+      nivel:"moderado"
+    },
+    borderline:{
+      palavras:["medo de ser abandonado","instabilidade emocional","relacionamentos instaveis","relacionamentos toxicos","explosao de raiva","raiva desproporcional","nao sei quem eu sou","sensacao de vazio cronico","idealizacao e desvalorizacao","autocritica extrema"],
+      insight:"Indicadores de Transtorno de Personalidade Borderline. Terapia dialética (DBT) é altamente eficaz.",
+      nivel:"alto"
+    },
+    dismorfico:{
+      palavras:["aparencia","defeito no corpo","acho meu corpo feio","nao consigo olhar no espelho","vergonha do corpo","disformismo","acho meu rosto horrivel","quero mudar algo no corpo"],
+      insight:"Sintomas compatíveis com Transtorno Dismórfico Corporal. Evite procedimentos estéticos sem acompanhamento.",
+      nivel:"moderado"
+    },
+    acumulacao:{
+      palavras:["acumulo coisas","nao consigo jogar nada fora","casa cheia","acumulador","guardo tudo","nao descarto","colecao excessiva"],
+      insight:"Indicadores de Transtorno de Acumulação. Terapia e organização com profissional são recomendados.",
+      nivel:"moderado"
+    },
+    dissociativo:{
+      palavras:["nao me sinto real","desrealizacao","despersonalizacao","nao me sinto no meu corpo","mundo parece irreal","parece um sonho","nao reconheco a mim mesmo","como se eu estivesse fora"],
+      insight:"Sintomas dissociativos identificados. Podem estar relacionados a trauma. Avaliação especializada recomendada.",
+      nivel:"alto"
+    },
+    fobia_social:{
+      palavras:["medo de julgamento","evito pessoas","nao consigo falar em publico","tenho vergonha social","fico vermelho","evito eventos sociais","tenho medo de ser avaliado"],
+      insight:"Indicadores de Fobia Social (Ansiedade Social). Terapia cognitivo-comportamental é eficaz.",
+      nivel:"moderado"
+    },
+    transtorno_alimentar:{
+      palavras:["nao consigo comer","comendo demais","perdi peso demais","ganhei peso demais","culpa ao comer","vomito","jejum","obsessao com corpo","disturbio alimentar","nao me acho magra","anorexia","bulimia"],
+      insight:"Possíveis indicadores de Transtorno Alimentar. Busque ajuda médica urgente se houver risco à saúde.",
+      nivel:"alto"
+    },
+    dependencia_quimica:{
+      palavras:["bebo muito","uso drogas","nao consigo parar","abstinencia","crise de abstinencia","uso para lidar","alcool em excesso","uso compulsivo"],
+      insight:"Indicadores de possível dependência química. Grupos de apoio (AA, NA) e tratamento especializado são recomendados.",
+      nivel:"alto"
+    },
+    disturbio_sono:{
+      palavras:["nao consigo dormir","insomnia","insônia","acordo cansado","pesadelos","despertar cedo","dormo demais","nao descanso","sono irregular","dificuldade para dormir"],
+      insight:"Distúrbios do sono identificados. Higiene do sono e avaliação podem melhorar significativamente sua saúde.",
+      nivel:"moderado"
+    },
+    suicidio:{
+      palavras:["morrer","acabar com tudo","suicidio","nao vale a pena","nao quero mais viver","pensamento de morte","planejar se matar","nao aguento mais","quero desaparecer"],
+      insight:"⚠️ ALERTA CRÍTICO: Ideação suicida detectada. BUSQUE AJUDA IMEDIATA: CVV 188 (24h, gratuito e confidencial).",
+      nivel:"urgente"
+    },
+    burnout:{
+      palavras:["esgotado","burnout","exaustao","exaustao mental","nao aguento trabalhar","perdi a paixao pelo trabalho","nao consigo produzir","estressado no trabalho","pressão no trabalho"],
+      insight:"Possíveis sinais de Burnout (Síndrome do Esgotamento). Licença médica e acompanhamento são recomendados.",
+      nivel:"moderado"
+    },
+    estresse_pos_parto:{
+      palavras:["depressao pos parto","nao me conecto com o bebe","chico sem motivo apos parto","nao consigo cuidar do bebe","culpa materna","ansiedade pos parto"],
+      insight:"Possíveis indicadores de Depressão Pós-Parto. Busque ajuda com obstetra e psicólogo especializado.",
+      nivel:"alto"
+    }
   };
+  
   let insights=[];
+  let alertas=[];
+  let recomendacoes=[];
+  let transtornosDetectados=[];
+  
   for(let[cat,dados] of Object.entries(cats)){
+    let encontrado=false;
     for(let p of dados.palavras){
-      if(tl.includes(p)){insights.push(dados.insight);break;}
+      if(tl.includes(p)){
+        encontrado=true;
+        break;
+      }
+    }
+    if(encontrado){
+      insights.push(dados.insight);
+      transtornosDetectados.push(cat);
+      if(dados.nivel==="urgente"){
+        alertas.push("🚨 ATENÇÃO URGENTE: Risco identificado. Busque ajuda imediata.");
+        recomendacoes.push("Ligue CVV: 188 (24h, gratuito, confidencial)");
+        recomendacoes.push("Vá ao pronto-socorro mais próximo se em crise.");
+      } else if(dados.nivel==="alto"){
+        alertas.push(`⚠️ Indicadores significativos de ${cat.replace('_',' ').replace(/\b\w/g,l=>l.toUpperCase())}. Avaliação profissional recomendada.`);
+        recomendacoes.push("Consulte um psiquiatra para avaliação detalhada.");
+      } else {
+        recomendacoes.push(`${cat.replace('_',' ').replace(/\b\w/g,l=>l.toUpperCase())}: considere avaliação com profissional especializado.`);
+      }
     }
   }
-  if(insights.length===0) insights=["Relato não específico. Recomenda-se aprofundar em consulta clínica."];
-  return {insights,alertas:[],recomendacoes:["Considere avaliação com psicólogo ou psiquiatra.","CVV: 188 (24h, gratuito)."]};
+  
+  if(insights.length===0) insights=["Relato não específico. Recomendamos aprofundar em consulta clínica para melhor compreensão dos sintomas."];
+  if(recomendacoes.length===0) recomendacoes=["Considere avaliação com psicólogo ou psiquiatra.","CVV: 188 (24h, gratuito)."];
+  
+  return {insights,alertas,recomendacoes,transtornosDetectados};
 }
 
 function gerarRelatorio(){
@@ -362,11 +579,23 @@ function gerarRelatorio(){
     tept:pontuacoes.tept>=10?"Alta":pontuacoes.tept>=5?"Moderada":"Baixa",
     tdah:pontuacoes.tdah>=6?"Moderada":pontuacoes.tdah>=3?"Leve":"Baixa",
     toc:pontuacoes.toc>=5?"Moderado-Severo":"Leve",
-    borderline:pontuacoes.borderline>=8?"Fortes traços":pontuacoes.borderline>=4?"Traços presentes":"Traços baixos"
+    borderline:pontuacoes.borderline>=8?"Fortes traços":pontuacoes.borderline>=4?"Traços presentes":"Traços baixos",
+    dismorfico:pontuacoes.dismorfico>=3?"Moderado":pontuacoes.dismorfico>=1?"Leve":"Não indicado",
+    acumulacao:pontuacoes.acumulacao>=3?"Moderado":pontuacoes.acumulacao>=1?"Leve":"Não indicado",
+    dissociativo:pontuacoes.dissociativo>=3?"Moderado":pontuacoes.dissociativo>=1?"Leve":"Não indicado"
   };
 
   const pct=(p,m)=>Math.round((p/m)*100);
   const cor=(p)=>p>70?'#e53e3e':p>40?'#fdcb6e':'#00b894';
+  const nomesAreas={
+    depressao:'Depressão',ansiedade:'Ansiedade',bipolar:'Transtorno Bipolar',
+    tept:'TEPT (Trauma)',tdah:'TDAH',toc:'TOC',borderline:'Borderline',
+    dismorfico:'Transtorno Dismórfico',acumulacao:'Transtorno de Acumulação',
+    dissociativo:'Dissociação'
+  };
+
+  // Verifica se há alerta urgente
+  const temAlertaUrgente = analise.alertas.some(a => a.includes('URGENTE'));
 
   const relatorioHTML=`
     <div style="text-align:center;border-bottom:2px solid #6c5ce7;padding-bottom:20px;margin-bottom:24px;">
@@ -381,52 +610,196 @@ function gerarRelatorio(){
       <p><strong>📧 E-mail:</strong> ${email}</p>
       <p><strong>✅ Avaliação:</strong> Gratuita</p>
     </div>
+    ${temAlertaUrgente?`<div class="alerta-urgencia"><p style="font-weight:bold;color:#e53e3e;font-size:16px;">🚨 ALERTA DE URGÊNCIA</p><p style="color:#e53e3e;margin-top:8px;">Identificamos sinais que requerem atenção imediata. Por favor, entre em contato com o CVV (188) ou procure ajuda profissional urgente.</p></div>`:''}
     ${relato?`
     <div style="background:#fff3e0;border-left:4px solid #fdcb6e;padding:15px;margin-bottom:20px;border-radius:8px;">
       <h3>🗣️ Seu Relato</h3>
       <p style="font-style:italic;">"${relato}"</p>
     </div>
     <div style="background:linear-gradient(135deg,#6c5ce7,#4a3dbf);border-radius:12px;padding:20px;color:white;margin-bottom:20px;">
-      <h3>🤖 Análise do Relato</h3>
-      ${analise.insights.map(i=>`<p>• ${i}</p>`).join('')}
+      <h3>🤖 Análise do Relato por IA</h3>
+      ${analise.insights.map(i=>`<p style="margin-bottom:8px;">• ${i}</p>`).join('')}
     </div>`:''}
-    <h3 style="color:#6c5ce7;margin-bottom:16px;">📊 Resultados por Área</h3>
+    <h3 style="color:#6c5ce7;margin-bottom:16px;">📊 Resultados por Área (10 Transtornos Avaliados)</h3>
     ${Object.entries(niveis).map(([area,nivel])=>{
       const p=pct(pontuacoes[area]||0,maximos[area]||10);
-      const nomeArea={depressao:'Depressão',ansiedade:'Ansiedade',bipolar:'Bipolar',tept:'TEPT/Trauma',tdah:'TDAH',toc:'TOC',borderline:'Borderline'}[area];
       return `<div style="margin-bottom:16px;">
-        <div style="display:flex;justify-content:space-between;"><strong>${nomeArea}</strong><span>${nivel}</span></div>
+        <div style="display:flex;justify-content:space-between;"><strong>${nomesAreas[area]}</strong><span style="color:${cor(p)};font-weight:600;">${nivel}</span></div>
         <div style="background:#e0e0e0;border-radius:10px;height:10px;margin:6px 0;">
-          <div style="background:${cor(p)};width:${p}%;height:10px;border-radius:10px;"></div>
+          <div style="background:${cor(p)};width:${p}%;height:10px;border-radius:10px;transition:width 0.5s;"></div>
         </div>
         <small style="color:#636e72;">${p}% de indicadores</small>
       </div>`;
     }).join('')}
+    ${analise.recomendacoes.length>0?`
+    <div style="background:#f0fff4;border-left:4px solid #00b894;padding:15px;margin:20px 0;border-radius:8px;">
+      <h4>💚 Recomendações</h4>
+      ${analise.recomendacoes.map(r=>`<p style="margin:6px 0;">• ${r}</p>`).join('')}
+    </div>`:''}
     <div style="background:#f8f7ff;border-left:4px solid #6c5ce7;padding:15px;margin:20px 0;border-radius:8px;">
-      <h4>📋 Recomendação</h4>
-      <p>Os resultados desta avaliação são indicativos. Recomendamos consulta com psicólogo ou psiquiatra para diagnóstico preciso.</p>
+      <h4>📋 Importante</h4>
+      <p>Os resultados desta avaliação são indicativos e baseados em triagem. Eles NÃO substituem um diagnóstico profissional. Recomendamos levar este relatório a um psicólogo ou psiquiatra para avaliação completa.</p>
     </div>
     <div style="background:white;border:2px solid #e53e3e;border-radius:12px;padding:15px;text-align:center;margin-top:20px;">
       <p>💚 <strong>CVV - Centro de Valorização da Vida</strong></p>
       <p style="font-size:28px;font-weight:bold;color:#e53e3e;">188</p>
       <p>Atendimento 24h — gratuito e confidencial</p>
+      <p style="font-size:12px;margin-top:8px;">Chat: <a href="https://www.cvv.org.br" target="_blank" style="color:#6c5ce7;">www.cvv.org.br</a> | E-mail: contato@cvv.org.br</p>
+    </div>
+    <div class="btn-group">
+      <button class="btn-enviar-email" onclick="enviarEmailRelatorio('${nome}','${email}')">📧 Enviar Relatório por E-mail</button>
+      <button class="btn-whatsapp" onclick="enviarWhatsAppRelatorio('${nome}','${whatsapp}')">💬 Enviar Relatório por WhatsApp</button>
+      <button class="btn-compartilhar" onclick="compartilharRelatorio()">📤 Compartilhar Resultado</button>
+      <button class="btn-restart" onclick="restart()">📋 Fazer nova avaliação</button>
     </div>
     <div style="text-align:center;font-size:11px;color:#636e72;margin-top:20px;padding-top:15px;border-top:1px solid #eee;">
       ⚠️ Esta avaliação não substitui diagnóstico profissional.<br>MenteCheck © 2026 — Gratuito para sempre
     </div>
-    <button onclick="restart()" style="background:#6c5ce7;color:white;border:none;padding:14px 28px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:20px;">📋 Fazer nova avaliação</button>
   `;
 
+  // Envia dados para o admin via FormSubmit
   fetch('https://formsubmit.co/ajax/mentecheck2025@gmail.com',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({nome,email,whatsapp,idade,relato,insights:analise.insights,relatorio:relatorioHTML,_subject:`📊 Relatório MenteCheck - ${nome}`,_template:'table'})
-  }).catch(e=>console.log(e));
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      nome,email,whatsapp,idade,relato,
+      insights:analise.insights.join(' | '),
+      alertas:analise.alertas.join(' | '),
+      transtornos:analise.transtornosDetectados.join(', '),
+      _subject:`📊 Relatório MenteCheck - ${nome} (${hoje})`,
+      _template:'table'
+    })
+  }).then(r=>r.json()).then(data=>console.log('Relatório enviado:',data)).catch(e=>console.log('Erro no envio:',e));
+
+  // Guarda dados para envio posterior
+  window._dadosRelatorio={nome,email,whatsapp,idade,relato,analise,niveis,pontuacoes,maximos,hoje,hora};
 
   document.getElementById('cadastro').style.display='none';
   document.getElementById('resultado-final').style.display='block';
   document.getElementById('resultadoCompleto').innerHTML=relatorioHTML;
   window.scrollTo(0,0);
+}
+
+// FUNÇÃO: Enviar relatório por email diretamente ao usuário
+function enviarEmailRelatorio(nome,email){
+  const dados=window._dadosRelatorio;
+  if(!dados){alert('Erro: dados do relatório não encontrados.');return;}
+  
+  // Monta o conteúdo do email
+  const resumos=dados.niveis;
+  let corpo=`Olá ${nome},\n\n`;
+  corpo+=`Aqui está o resumo da sua avaliação MenteCheck realizada em ${dados.hoje}.\n\n`;
+  corpo+=`=== RESULTADOS ===\n\n`;
+  
+  const nomesAreas={
+    depressao:'Depressão',ansiedade:'Ansiedade',bipolar:'Transtorno Bipolar',
+    tept:'TEPT (Trauma)',tdah:'TDAH',toc:'TOC',borderline:'Borderline',
+    dismorfico:'Transtorno Dismórfico',acumulacao:'Transtorno de Acumulação',
+    dissociativo:'Dissociação'
+  };
+  
+  for(let[area,nivel] of Object.entries(resumos)){
+    const p=Math.round((dados.pontuacoes[area]||0)/(dados.maximos[area]||10)*100);
+    corpo+=`${nomesAreas[area]}: ${nivel} (${p}%)\n`;
+  }
+  
+  if(dados.analise.insights.length>0){
+    corpo+=`\n=== ANÁLISE DO RELATO ===\n`;
+    dados.analise.insights.forEach(i=>corpo+=`• ${i}\n`);
+  }
+  
+  if(dados.analise.alertas.length>0){
+    corpo+=`\n⚠️ ATENÇÃO:\n`;
+    dados.analise.alertas.forEach(a=>corpo+=`${a}\n`);
+  }
+  
+  corpo+=`\n=== RECOMENDAÇÕES ===\n`;
+  dados.analise.recomendacoes.forEach(r=>corpo+=`• ${r}\n`);
+  
+  corpo+=`\n\nLembre-se: esta avaliação é indicativa. Consulte um profissional.\n`;
+  corpo+=`CVV: 188 (24h, gratuito)\n`;
+  corpo+=`MenteCheck © 2026`;
+
+  // Usa mailto: para abrir o cliente de email do usuário
+  const assunto=`Seu Relatório MenteCheck - ${nome}`;
+  const mailtoLink=`mailto:${email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+  window.open(mailtoLink,'_blank');
+  
+  // Também envia via FormSubmit para registro
+  fetch('https://formsubmit.co/ajax/mentecheck2025@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      _subject:`📧 Relatório enviado para ${nome}`,
+      tipo:'envio_email',
+      nome,email,whatsapp:dados.whatsapp,idade:dados.idade,
+      resumo_relatorio:corpo,
+      _template:'table'
+    })
+  }).then(r=>r.json()).then(data=>{
+    alert('✅ Relatório enviado por e-mail com sucesso! Verifique sua caixa de entrada.');
+  }).catch(e=>{
+    alert('✅ Relatório aberto no seu cliente de e-mail. Por favor, envie para concluir.');
+  });
+}
+
+// FUNÇÃO: Enviar relatório por WhatsApp
+function enviarWhatsAppRelatorio(nome,whatsapp){
+  const dados=window._dadosRelatorio;
+  if(!dados){alert('Erro: dados do relatório não encontrados.');return;}
+  
+  const nomesAreas={
+    depressao:'Depressão',ansiedade:'Ansiedade',bipolar:'Transtorno Bipolar',
+    tept:'TEPT',tdah:'TDAH',toc:'TOC',borderline:'Borderline',
+    dismorfico:'Disformismo',acumulacao:'Acumulação',dissociativo:'Dissociação'
+  };
+  
+  let msg=`🧠 *MenteCheck - Resultado*\n\n`;
+  msg+=`Olá ${nome}, aqui está seu resumo:\n\n`;
+  
+  for(let[area,nivel] of Object.entries(dados.niveis)){
+    const p=Math.round((dados.pontuacoes[area]||0)/(dados.maximos[area]||10)*100);
+    msg+=`${nomesAreas[area]}: ${nivel} (${p}%)\n`;
+  }
+  
+  if(dados.analise.insights.length>0){
+    msg+=`\n📋 *Análise:*\n`;
+    dados.analise.insights.slice(0,3).forEach(i=>msg+=`• ${i}\n`);
+  }
+  
+  msg+=`\n⚠️ Leve este resultado a um profissional.\nCVV: 188\nMenteCheck © 2026`;
+  
+  // Limpa o WhatsApp para formato de URL
+  let numLimpo=whatsapp.replace(/[^0-9]/g,'');
+  if(!numLimpo.startsWith('55')) numLimpo='55'+numLimpo;
+  
+  const waLink=`https://wa.me/${numLimpo}?text=${encodeURIComponent(msg)}`;
+  window.open(waLink,'_blank');
+}
+
+// FUNÇÃO: Compartilhar resultado
+function compartilharRelatorio(){
+  if(navigator.share){
+    const dados=window._dadosRelatorio;
+    const resumos=Object.entries(dados.niveis).map(([a,n])=>`${a}: ${n}`).join('\n');
+    navigator.share({
+      title:'Meu Resultado MenteCheck',
+      text:`Fiz minha avaliação de saúde mental no MenteCheck!\n\n${resumos}\n\nFaça a sua: gratuito e rápido!`,
+      url:window.location.href
+    }).catch(()=>{});
+  } else {
+    // Fallback: copia para área de transferência
+    const dados=window._dadosRelatorio;
+    let texto=`🧠 MenteCheck - Resultado\n\n`;
+    Object.entries(dados.niveis).forEach(([a,n])=>{
+      texto+=`${a}: ${n}\n`;
+    });
+    navigator.clipboard.writeText(texto).then(()=>{
+      alert('✅ Resultado copiado para a área de transferência! Cole onde desejar.');
+    }).catch(()=>{
+      prompt('Copie o texto abaixo:',texto);
+    });
+  }
 }
 
 function restart(){
